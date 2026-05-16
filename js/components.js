@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadNavbar();
     loadFooter();
+    loadChatbot();
 });
 
 function loadNavbar() {
@@ -101,5 +102,85 @@ function setActiveLink() {
         document.getElementById('nav-services')?.classList.add('active');
     } else if (page === 'contact.html') {
         document.getElementById('nav-contact')?.classList.add('active');
+    }
+}
+function loadChatbot() {
+    // Inject CSS
+    if (!document.getElementById('chatbot-css')) {
+        const link = document.createElement('link');
+        link.id = 'chatbot-css';
+        link.rel = 'stylesheet';
+        link.href = 'css/chatbot.css';
+        document.head.appendChild(link);
+    }
+
+    const chatbotHTML = `
+    <div class="chatbot-widget">
+        <button class="chat-button" aria-label="Open Chat">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+        <div class="chat-window">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">
+                        <img src="Images/logo.jpg" alt="Stelgan Logo" style="width: 100%; border-radius: 50%;">
+                    </div>
+                    <div>
+                        <div style="font-weight: 700; font-size: 1rem;">Stelgan Support</div>
+                        <div class="chat-status"><i class="fas fa-circle"></i> Online</div>
+                    </div>
+                </div>
+                <button class="close-chat" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.2rem;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-body"></div>
+            <div class="chat-footer">
+                <input type="text" class="chat-input" placeholder="Type your message...">
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    `;
+
+    // Create a div if it doesn't exist
+    let placeholder = document.getElementById('chatbot-placeholder');
+    if (!placeholder) {
+        placeholder = document.createElement('div');
+        placeholder.id = 'chatbot-placeholder';
+        document.body.appendChild(placeholder);
+    }
+    placeholder.innerHTML = chatbotHTML;
+
+    // Load Script then init
+    if (!document.getElementById('chatbot-js')) {
+        const script = document.createElement('script');
+        script.id = 'chatbot-js';
+        script.src = 'js/chatbot.js';
+        script.onload = () => {
+            if (typeof initChatbot === 'function') {
+                initChatbot();
+                setupCloseChat();
+            }
+        };
+        document.body.appendChild(script);
+    } else {
+        if (typeof initChatbot === 'function') {
+            initChatbot();
+            setupCloseChat();
+        }
+    }
+}
+
+function setupCloseChat() {
+    const closeBtn = document.querySelector('.close-chat');
+    const chatWindow = document.querySelector('.chat-window');
+    if (closeBtn && chatWindow) {
+        closeBtn.onclick = (e) => {
+            e.stopPropagation();
+            chatWindow.classList.remove('active');
+        };
     }
 }
