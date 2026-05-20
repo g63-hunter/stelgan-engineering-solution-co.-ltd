@@ -27,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_headers .= "MIME-Version: 1.0\r\n";
     $email_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-    // Send the email (setting envelope sender with -f flag to match the sender domain)
-    if (mail($recipient, $subject, $email_content, $email_headers, "-f" . $from_email)) {
+    // Send the email
+    if (mail($recipient, $subject, $email_content, $email_headers)) {
         http_response_code(200);
         echo "Thank you! Your message has been sent.";
     } else {
