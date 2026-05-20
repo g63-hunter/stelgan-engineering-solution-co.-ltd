@@ -18,6 +18,7 @@ function loadNavbar() {
                 <li><a href="index.html" id="nav-home">Home</a></li>
                 <li><a href="about.html" id="nav-about">About Us</a></li>
                 <li><a href="services.html" id="nav-services">Services</a></li>
+                <li><a href="projects.html" id="nav-projects">Projects</a></li>
                 <li><a href="contact.html" id="nav-contact">Contact Us</a></li>
             </ul>
             <a href="contact.html" class="btn btn-primary">Get a Quote</a>
@@ -31,6 +32,16 @@ function loadNavbar() {
     if (placeholder) {
         placeholder.innerHTML = navbarHTML;
         setActiveLink();
+        
+        setTimeout(() => {
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        }, 100);
     }
 }
 
@@ -56,6 +67,7 @@ function loadFooter() {
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="services.html">Our Services</a></li>
+                        <li><a href="projects.html">Projects</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
@@ -72,10 +84,17 @@ function loadFooter() {
                     <h4>Contact Info</h4>
                     <ul class="contact-info">
                         <li><i class="fas fa-map-marker-alt"></i> Entebbe - Kitoro, P.O. BOX 704242</li>
-                        <li><i class="fas fa-phone"></i> +256 768 822 733</li>
-                        <li><i class="fas fa-phone"></i> +256 748 814 016</li>
+                        <li><i class="fas fa-phone"></i> +256768822733 / +256748814016</li>
                         <li><i class="fas fa-envelope"></i> <a href="mailto:stelganengineeringsolutioncolt@gmail.com" style="color: #CBD5E1;">stelganengineeringsolutioncolt@gmail.com</a></li>
                     </ul>
+                    <div style="margin-top: 25px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 8px; color: #CBD5E1;" title="WhatsApp">
+                            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
+                            <span style="font-size: 0.95rem;">0778857786 / 0748814016</span>
+                        </div>
+                        <a href="https://www.facebook.com/stelganengineeringcompany" target="_blank" title="Facebook" style="color: #CBD5E1; font-size: 1.5rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#CBD5E1'"><i class="fab fa-facebook"></i></a>
+                        <a href="https://youtube.com/@stelganengineeringcompany?si=HgPhpSAtnIQWbz9m" target="_blank" title="YouTube" style="color: #CBD5E1; font-size: 1.5rem; transition: color 0.3s;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='#CBD5E1'"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -100,6 +119,8 @@ function setActiveLink() {
         document.getElementById('nav-about')?.classList.add('active');
     } else if (page === 'services.html') {
         document.getElementById('nav-services')?.classList.add('active');
+    } else if (page === 'projects.html') {
+        document.getElementById('nav-projects')?.classList.add('active');
     } else if (page === 'contact.html') {
         document.getElementById('nav-contact')?.classList.add('active');
     }

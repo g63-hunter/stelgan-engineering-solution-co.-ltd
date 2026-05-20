@@ -8,8 +8,9 @@
     --bg-light: #F8FAFC;
     --bg-white: #FFFFFF;
     --text-main: #1E293B;
-    --text-muted: #64748B;
+    --text-muted: #647488;
     --white: #FFFFFF;
+    --border: #1E293B;
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -28,7 +29,12 @@ body {
     overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
 }
@@ -163,10 +169,11 @@ section {
 
 .nav-links a {
     font-weight: 600;
-    color: var(--text-main);
+    color: var(--secondary);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
     color: var(--primary);
 }
 
@@ -225,6 +232,7 @@ section {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -235,12 +243,70 @@ section {
     animation: fadeInUp 0.8s ease forwards;
 }
 
-/* Responsive */
+/* Mobile Menu & Responsive Styling */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
 @media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block !important;
+    }
+
     .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--bg-white);
+        flex-direction: column;
+        align-items: center;
+        padding-top: 50px;
+        transition: var(--transition);
+        box-shadow: var(--shadow);
+    }
+
+    .nav-links.active {
+        left: 0;
+    }
+
+    .nav-links a {
+        font-size: 1.2rem;
+        display: block;
+        padding: 10px 0;
+    }
+
+    .nav-container>.btn {
         display: none;
     }
+
     .section-title h2 {
         font-size: 2rem;
+    }
+
+    .hero h1,
+    .inner-hero h1 {
+        font-size: clamp(2.5rem, 5vw, 4rem) !important;
+    }
+
+    #contactForm>div:first-child {
+        grid-template-columns: 1fr !important;
+    }
+
+    .hero-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+    }
+
+    .hero-btns .btn {
+        margin-left: 0 !important;
+        width: 100%;
+        text-align: center;
     }
 }

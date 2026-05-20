@@ -37,7 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Thank you! Your message has been sent to Stelgan Engineering.');
                     contactForm.reset();
                 } else {
-                    alert('Error: ' + result);
+                    const cleanResult = result.trim().startsWith('<') 
+                        ? 'Internal server error or mail configuration issue. Please contact the site owner.' 
+                        : result;
+                    alert('Error: ' + cleanResult);
                 }
             } catch (error) {
                 alert('Connection error. Please try again later.');

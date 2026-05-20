@@ -18,10 +18,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_content .= "Message:\n$message\n";
 
     // Email Headers
-    $email_headers = "From: $name <$email>";
+    $safe_name = str_replace(array("\r", "\n", '"'), '', $name);
+    // Use an email from the local domain as the sender (required by many hosting providers to prevent spoofing)
+    $from_email = "no-reply@stelganengineering.com";
 
-    // Send the email
-    if (mail($recipient, $subject, $email_content, $email_headers)) {
+    $email_headers = "From: \"$safe_name\" <$from_email>\r\n";
+    $email_headers .= "Reply-To: \"$safe_name\" <$email>\r\n";
+    $email_headers .= "MIME-Version: 1.0\r\n";
+    $email_headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+    // Send the email (setting envelope sender with -f flag to match the sender domain)
+    if (mail($recipient, $subject, $email_content, $email_headers, "-f" . $from_email)) {
         http_response_code(200);
         echo "Thank you! Your message has been sent.";
     } else {

@@ -34,7 +34,7 @@
     right: 0;
     width: 380px;
     height: 550px;
-    background: white;
+    background: var(--bg-white);
     border-radius: 25px;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
     display: none;
@@ -71,7 +71,7 @@
 .chat-avatar {
     width: 45px;
     height: 45px;
-    background: white;
+    background: var(--bg-white);
     border-radius: 50%;
     padding: 4px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.1);
@@ -128,7 +128,7 @@
 
 .message.bot {
     align-self: flex-start;
-    background: white;
+    background: var(--bg-white);
     color: var(--text-main);
     border-bottom-left-radius: 5px;
     box-shadow: 0 3px 12px rgba(0,0,0,0.06);
@@ -145,7 +145,7 @@
 
 .chat-footer {
     padding: 20px;
-    background: white;
+    background: var(--bg-white);
     border-top: 1px solid #f0f0f0;
     display: flex;
     gap: 12px;
@@ -165,7 +165,7 @@
 
 .chat-input:focus {
     border-color: var(--primary);
-    background: white;
+    background: var(--bg-white);
     box-shadow: 0 0 0 4px rgba(0, 71, 171, 0.05);
 }
 
@@ -198,7 +198,7 @@
 }
 
 .suggestion-chip {
-    background: white;
+    background: var(--bg-white);
     color: var(--primary);
     padding: 8px 16px;
     border-radius: 20px;
